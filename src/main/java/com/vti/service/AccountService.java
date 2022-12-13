@@ -107,6 +107,7 @@ public class AccountService implements IAccountService {
             throw new UsernameNotFoundException("Can NOT found account has username = " + username);
         }
         return new User(
+
                 account.getUsername(),
                 account.getPassword(),
                 AuthorityUtils.createAuthorityList(account.getRole().toString())

@@ -4,8 +4,7 @@ import com.vti.entity.Department;
 import com.vti.validation.AccountUsernameNotExists;
 import com.vti.validation.DepartmentNameNotExists;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.Valid;
@@ -15,8 +14,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.PositiveOrZero;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 public class DepartmentCreateForm {
     @NotBlank(message = "{DepartmentForm.name.NotBlank}")
     @Length(max = 50, message = "Department name has max 50 characters.")
@@ -34,8 +32,7 @@ public class DepartmentCreateForm {
     private String type;
 
     private List<@Valid Account> accounts;
-    @Getter
-    @Setter
+    @Data
     public static class Account{
         @NotBlank(message = "Account username must be NOT blank")
         @Length(max = 50, message = "Account username has max 50 characters.")

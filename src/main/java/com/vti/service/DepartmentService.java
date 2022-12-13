@@ -51,8 +51,8 @@ public class DepartmentService implements IDepartmentService {
     public void create(DepartmentCreateForm form) {
         Department department = mapper.map(form, Department.class);
         List<Account> accounts = department.getAccounts();
-        if (accounts != null){
-            for (Account account : accounts){
+        if (accounts != null) {
+            for (Account account : accounts) {
                 String encodedPassword = encoder.encode(account.getPassword());
                 account.setPassword(encodedPassword);
                 account.setDepartment(department);
@@ -60,7 +60,6 @@ public class DepartmentService implements IDepartmentService {
             }
         }
         repository.save(department);
-
     }
 
     @Override

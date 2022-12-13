@@ -39,13 +39,6 @@ public class DepartmentController {
         Page<Department> page = service.findAll(pageable, form);
         List<Department> departments = page.getContent();
         List<DepartmentDTO> dtos = mapper.map(departments, new TypeToken<List<DepartmentDTO>>(){}.getType());
-        for (DepartmentDTO dto : dtos){
-            dto.add(linkTo(methodOn(DepartmentController.class).findById(dto.getId())).withSelfRel());
-            List<DepartmentDTO.AccountDTO> accountDTOS = dto.getAccounts();
-            for (DepartmentDTO.AccountDTO accountDTO : accountDTOS){
-                dto.add(linkTo(methodOn(AccountController.class).findById(accountDTO.getId())).withSelfRel());
-            }
-        }
         return new PageImpl<>(dtos, pageable, page.getTotalElements());
     }
 
@@ -57,11 +50,6 @@ public class DepartmentController {
         return dto;
     }
 
-//    @GetMapping("/name/{name}")
-//    public Department findByName(@PathVariable("name") String name) {
-//        return service.findByName(name);
-//    }
-//@Valid nhờ controller xác thực
     @PostMapping
     public void create(@RequestBody @Valid DepartmentCreateForm form) {
 
@@ -79,8 +67,4 @@ public class DepartmentController {
         service.deleteAllById(ids);
     }
 
-//    @DeleteMapping("/name/{name}")
-//    public void deleteByName(@PathVariable("name") String name) {
-//        service.deleteByName(name);
-//    }
 }
